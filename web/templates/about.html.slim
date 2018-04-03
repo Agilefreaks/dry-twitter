@@ -1,0 +1,14 @@
+h1 About DryTwitter
+p Authors
+
+.panel
+  .table
+    table
+      thead
+        tr
+          th Name
+      tbody
+        - authors.each do |author|
+          tr
+            td.align-middle
+              p = author
