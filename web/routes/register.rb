@@ -5,7 +5,7 @@ class DryTwitter::Web
     end
 
     r.post do
-      r.params
+      p r.params
       r.view "register"
     end
   end

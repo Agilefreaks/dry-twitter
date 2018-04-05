@@ -1,8 +1,13 @@
-h1 Register user
+form.text-center
+  h1.h3.mb-3.font-weight-normal Register user
 
-.panel
-  form action="/register" method="post"
-    == csrf_tag
-    input type="text" id="first_name" name="user[first_name]"
-    input type="password" id="password" name="user[password]"
-    button type="submit" Create user
+  div
+    label.sr-only for="user_name" User name
+    input type="text" id="user_name" name="user[user_name]" placeholder="User name"
+
+  div
+    label.sr-only for="password" Password
+    input type="password" id="password" name="user[password]" placeholder="Password"
+
+  div
+    button.btn.btn-primary type="submit" Create user
