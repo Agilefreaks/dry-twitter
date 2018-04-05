@@ -1,0 +1,8 @@
+h1 Register user
+
+.panel
+  form action="/register" method="post"
+    == csrf_tag
+    input type="text" id="first_name" name="user[first_name]"
+    input type="password" id="password" name="user[password]"
+    button type="submit" Create user
