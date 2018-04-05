@@ -1,14 +1,8 @@
-h1 About DryTwitter
-p Authors
+div.text-center
+  h2 About Dry Twitter
+  h4 Authors
 
-.panel
-  .table
-    table
-      thead
-        tr
-          th Name
-      tbody
-        - authors.each do |author|
-          tr
-            td.align-middle
-              p = author
+  ul.list-group
+    - authors.each do |author|
+      li.list-group-item
+        p = author
