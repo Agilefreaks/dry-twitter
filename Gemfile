@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 
 gem "rake"
+gem 'wdm'
+gem 'bootstrap', '~> 4.0.0'
 
 # Web framework
 gem "dry-system", "~> 0.9"
@@ -39,5 +41,3 @@ group :test do
   gem "rspec"
   gem "rom-factory", "~> 0.5"
 end
-
-gem 'wdm'
