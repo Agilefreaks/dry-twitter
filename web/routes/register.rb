@@ -6,7 +6,7 @@ class DryTwitter::Web
 
     r.post do
       p r.params
-      r.view "register"
+      r.view "register", user: {'user_name'=>'Zed'}
     end
   end
 end
