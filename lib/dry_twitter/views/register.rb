@@ -6,6 +6,12 @@ module DryTwitter
       configure do |config|
         config.template = "register"
       end
+
+      def locals(options = {})
+        super.merge(
+            user: options[:params]
+        )
+      end
     end
   end
 end

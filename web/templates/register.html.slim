@@ -1,13 +1,18 @@
-form.text-center
+form.text-center action="/register" method="post"
+  == csrf_tag
   h1.h3.mb-3.font-weight-normal Register user
 
   div
     label.sr-only for="user_name" User name
-    input type="text" id="user_name" name="user[user_name]" placeholder="User name"
+    input type="text" id="user_name" name="user[user_name]" value="#{(user || {}).fetch('user_name', '')}" placeholder="User name"
 
   div
     label.sr-only for="password" Password
     input type="password" id="password" name="user[password]" placeholder="Password"
+
+  div
+    label.sr-only for="password" Confirm password
+    input type="password" id="conform_password" name="user[conform_password]" placeholder="Confirm password"
 
   div
     button.btn.btn-primary type="submit" Create user
