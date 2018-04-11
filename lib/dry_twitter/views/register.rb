@@ -9,7 +9,7 @@ module DryTwitter
 
       def locals(options = {})
         super.merge(
-            user: {'user_name'=>'Zed1'}
+            user: options[:params]
         )
       end
     end

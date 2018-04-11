@@ -4,7 +4,7 @@ form.text-center action="/register" method="post"
 
   div
     label.sr-only for="user_name" User name
-    input type="text" id="user_name" name="user[user_name]" value="#{user.fetch('user_name')}" placeholder="User name"
+    input type="text" id="user_name" name="user[user_name]" value="#{(user || {}).fetch('user_name', '')}" placeholder="User name"
 
   div
     label.sr-only for="password" Password

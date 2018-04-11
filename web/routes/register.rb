@@ -5,8 +5,21 @@ class DryTwitter::Web
     end
 
     r.post do
-      p r.params
-      r.view "register", user: {'user_name'=>'Zed'}
+      r.resolve "registration.register" do |registration|
+        registration.(r.params) do |m|
+          m.success do
+            r.redirect "/"
+          end
+
+          m.failure :validate do |error|
+            r.view "register", params: r.params["user"]
+          end
+
+          m.failure do |error|
+            p error
+          end
+        end
+      end
     end
   end
 end

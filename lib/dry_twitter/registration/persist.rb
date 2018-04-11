@@ -1,14 +1,12 @@
-require "dry-container"
-require "dry/transaction"
 require "dry/transaction/operation"
 
 module DryTwitter
-  module Operations
-    class Create
+  module Registration
+    class Persist
       include Dry::Transaction::Operation
 
       def call(input)
-        Success(name: input["user_name"])
+        Success(input)
       end
     end
   end
