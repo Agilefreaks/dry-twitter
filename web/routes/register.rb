@@ -12,7 +12,6 @@ class DryTwitter::Web
           end
 
           m.failure :validate do |errors|
-            p errors
             params_and_errors = r.params.merge({})
             params_and_errors[:errors] = errors
             r.view "register", input: params_and_errors

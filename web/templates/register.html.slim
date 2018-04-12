@@ -22,6 +22,8 @@ form.text-center action="/register" method="post"
     ul
       - (errors || {}).fetch('confirm_password', []).each do |error|
         p = error
+      - (errors || {}).fetch(:confirm_password, []).each do |error|
+        p = error
 
   div
     button.btn.btn-primary type="submit" Create user
