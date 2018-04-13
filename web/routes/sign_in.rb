@@ -11,14 +11,8 @@ class DryTwitter::Web
             r.redirect "/"
           end
 
-          m.failure :validate do |errors|
-            params_and_errors = r.params.merge({})
-            params_and_errors[:errors] = errors
-            r.view "sign_in", input: params_and_errors
-          end
-
-          m.failure do |errors|
-            p errors
+          m.failure do |error|
+            r.view "sign_in", error: error
           end
         end
       end

@@ -4,17 +4,13 @@ form.text-center action="/sign_in" method="post"
 
   div
     label.sr-only for="user_name" User name
-    input type="text" id="user_name" name="user[user_name]" value="#{(user || {}).fetch('user_name', '')}" placeholder="User name"
-    ul
-      - (errors || {}).fetch(:user_name, []).each do |error|
-        p = error
+    input type="text" id="user_name" name="user[user_name]" placeholder="User name"
 
   div
     label.sr-only for="password" Password
     input type="password" id="password" name="user[password]" placeholder="Password"
-    ul
-      - (errors || {}).fetch(:password, []).each do |error|
-        p = error
 
   div
     button.btn.btn-primary type="submit" Sign in
+
+  p #{error}
