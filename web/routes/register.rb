@@ -17,8 +17,8 @@ class DryTwitter::Web
             r.view "register", input: params_and_errors
           end
 
-          m.failure do |errors|
-            p errors
+          m.failure do |error|
+            p error
           end
         end
       end
