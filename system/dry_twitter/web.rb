@@ -3,6 +3,8 @@ require_relative "container"
 
 module DryTwitter
   class Web < Dry::Web::Roda::Application
+    use Rack::Session::Cookie, key: "rack.session"
+
     configure do |config|
       config.container = Container
       config.routes = "web/routes".freeze
