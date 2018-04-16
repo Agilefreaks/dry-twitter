@@ -6,17 +6,19 @@ class DryTwitter::Web
 
     r.post do
       r.resolve "registration.register" do |registration|
-        registration.(r.params) do |m|
+        registration.call(r.params) do |m|
           m.success do
             r.redirect "/"
           end
 
-          m.failure :validate do |error|
-            r.view "register", params: r.params["user"]
+          m.failure :validate do |errors|
+            params_and_errors = r.params.merge({})
+            params_and_errors[:errors] = errors
+            r.view "register", input: params_and_errors
           end
 
-          m.failure do |error|
-            p error
+          m.failure do |errors|
+            p errors
           end
         end
       end
