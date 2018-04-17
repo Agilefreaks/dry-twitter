@@ -1,6 +1,8 @@
 require "dry/transaction/operation"
-require "dry_twitter/import"
-require "dry-monads"
+require 'dry_twitter/import'
+require 'dry-monads'
+require 'armor'
+require 'securerandom'
 
 module DryTwitter
   module Registration
@@ -10,7 +12,11 @@ module DryTwitter
       include Dry::Monads::Try::Mixin
 
       def call(input)
-        Try() {users.create(user_name: input["user"]["user_name"], password: input["user"]["password"])}.to_result
+        Try() {
+          salt = SecureRandom.base64(16)
+          hash = Armor.digest(input["user"]["password"], salt)
+          users.create(user_name: input["user"]["user_name"], password: hash, salt: salt)
+        }.to_result
       end
     end
   end

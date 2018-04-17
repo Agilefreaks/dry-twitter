@@ -3,6 +3,7 @@ source "https://rubygems.org"
 gem "rake"
 gem 'wdm'
 gem 'bootstrap', '~> 4.0.0'
+gem 'armor'
 
 # Web framework
 gem "dry-system", "~> 0.9"
