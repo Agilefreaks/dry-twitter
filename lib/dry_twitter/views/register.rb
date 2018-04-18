@@ -8,14 +8,10 @@ module DryTwitter
       end
 
       def locals(options = {})
-        if options.size > 0
-          super.merge(
-              user: options[:input]["user"],
-              errors: options[:input][:errors]
-          )
-        else
-          super.merge(user: nil, errors: nil)
-        end
+        super.merge(
+          user: options.dig(:input, "user"),
+          errors: options.dig(:input, :errors)
+        )
       end
     end
   end
