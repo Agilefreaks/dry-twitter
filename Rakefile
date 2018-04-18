@@ -73,7 +73,7 @@ namespace :db do
   end
 
   desc "Migrate database up to latest migration available"
-  task :migrations do
+  task :migrate do
     # Enhance the migration task provided by ROM
 
     # Once it finishes, dump the db structure
