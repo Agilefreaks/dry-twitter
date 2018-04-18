@@ -6,8 +6,8 @@ module DryTwitter
     class Users < DryTwitter::Repository[:users]
       commands :create
 
-      def query(conditions)
-        users.where(conditions).to_a
+      def by_user_name(user_name)
+        users.where(user_name: user_name).to_a
       end
     end
   end

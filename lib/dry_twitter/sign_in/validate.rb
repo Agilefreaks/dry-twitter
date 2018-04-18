@@ -9,7 +9,7 @@ module DryTwitter
 
       def call(input)
         begin
-          result = users.query(user_name: input["user"]["user_name"], password: input["user"]["password"])
+          result = users.by_user_name(user_name: input["user"]["user_name"], password: input["user"]["password"])
           result.size > 0 ? Success(input) : Failure("There is no user with the provided credentials")
         rescue
           Failure("An unexpected exception was raised while creating user database record")
