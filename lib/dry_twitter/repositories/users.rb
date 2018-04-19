@@ -9,6 +9,10 @@ module DryTwitter
       def by_user_name(user_name)
         users.where(user_name: user_name).to_a
       end
+
+      def correct_credentials(user_name, password)
+        users.where(user_name: user_name, password: password).one.nil?
+      end
     end
   end
 end
