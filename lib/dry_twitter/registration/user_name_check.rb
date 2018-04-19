@@ -11,8 +11,8 @@ module DryTwitter
 
       def call(input)
         result = Try() {
-          users_result = users.by_user_name(input["user"]["user_name"])
-          raise 'There is already a user with the provided user name' if users_result.size > 0
+          user_result = users.by_user_name(input["user"]["user_name"])
+          raise 'There is already a user with the provided user name' unless user_result.nil?
         }
 
         if result.value?

@@ -7,11 +7,7 @@ module DryTwitter
       commands :create
 
       def by_user_name(user_name)
-        users.where(user_name: user_name).to_a
-      end
-
-      def correct_credentials(user_name, password)
-        users.where(user_name: user_name, password: password).one.nil?
+        users.where(user_name: user_name).one
       end
     end
   end

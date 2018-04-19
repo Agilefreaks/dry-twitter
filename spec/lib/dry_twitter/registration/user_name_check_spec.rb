@@ -6,9 +6,9 @@ class UsersRepo
     if user_name == 'fail_user'
       raise 'DB error'
     elsif user_name == 'existing_user'
-      [user_name]
+      user_name
     else
-      []
+      nil
     end
   end
 end
