@@ -1,21 +1,18 @@
-require "dry/transaction/operation"
+require 'dry/transaction/operation'
 require 'dry_twitter/import'
 require 'dry-monads'
-require 'armor'
-require 'securerandom'
 
 module DryTwitter
   module Registration
-    class Persist
+    class UserNameCheck
       include Dry::Transaction::Operation
       include DryTwitter::Import["repositories.users"]
       include Dry::Monads::Try::Mixin
 
       def call(input)
         result = Try() {
-          salt = SecureRandom.base64(16)
-          hash = Armor.digest(input["user"]["password"], salt)
-          users.create(user_name: input["user"]["user_name"], password: hash, salt: salt)
+          users_result = users.by_user_name(input["user"]["user_name"])
+          raise 'There is already a user with the provided user name' if users_result.size > 0
         }
 
         if result.value?

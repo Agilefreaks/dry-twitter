@@ -25,3 +25,6 @@ form.text-center action="/register" method="post"
 
   div
     button.btn.btn-primary type="submit" Create user
+    ul
+      - (errors || {}).fetch(:error_messages, []).each do |error|
+        p = error
