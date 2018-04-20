@@ -6,8 +6,9 @@ module DryTwitter
       include Dry::Transaction::Operation
 
       def call(input)
-        env = input[:env]
-        env['rack.session'][:user_name] = input["user"]["user_name"]
+        session = input[:session]
+        user_name = input["user"]["user_name"]
+        session[:user_name] = user_name
 
         Success(input)
       end
