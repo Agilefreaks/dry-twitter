@@ -22,7 +22,7 @@ module DryTwitter
       r.multi_route
 
       r.root do
-        r.view "welcome"
+        r.view "welcome", session: session
       end
     end
 
