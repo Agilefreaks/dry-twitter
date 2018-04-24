@@ -10,3 +10,6 @@ form.text-center action="/post" method="post"
 
   div
     button.btn.btn-primary.mt-3 type="submit" Post message
+    ul
+    - (errors || {}).fetch(:error_messages, []).each do |error|
+      p = error

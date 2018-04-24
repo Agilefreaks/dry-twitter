@@ -6,11 +6,12 @@ module DryTwitter
   module Post
     class Persist
       include Dry::Transaction::Operation
+      include DryTwitter::Import["repositories.posts"]
       include Dry::Monads::Try::Mixin
 
       def call(input)
         result = Try() {
-          puts 'persist'
+          posts.create(message: input["message"], user_id: input[:session]["user_id"])
         }
 
         if result.value?
