@@ -10,7 +10,9 @@ class DryTwitter::Web
 
     r.post do
       r.resolve "post.post" do |post|
-        post.call(r.params) do |m|
+        params_and_session = r.params.merge({})
+        params_and_session[:session] = session
+        post.call(params_and_session) do |m|
           m.success do
             r.redirect "/"
           end

@@ -20,6 +20,8 @@ module DryTwitter
           hash = Armor.digest(user["password"], user_data["salt"])
           password_matches = (hash == user_data["password"])
           raise 'There is no user with the provided credentials' if !password_matches
+
+          user["user_id"] = user_data["id"]
         }
 
         if result.value?
