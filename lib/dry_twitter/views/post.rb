@@ -8,7 +8,10 @@ module DryTwitter
       end
 
       def locals(options = {})
-        super.merge(message: 'dummy message', errors: nil)
+        super.merge(
+            message: options.dig(:input, "message"),
+            errors: options.dig(:input, :errors)
+        )
       end
     end
   end
