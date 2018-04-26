@@ -6,10 +6,6 @@ module DryTwitter
       configure do |config|
         config.template = "welcome"
       end
-
-      def locals(options = {})
-        super.merge(user_name: options[:session][:user_name])
-      end
     end
   end
 end

@@ -22,7 +22,7 @@ module DryTwitter
       r.multi_route
 
       r.root do
-        r.view "welcome", session: session
+        r.view "welcome"
       end
     end
 
@@ -38,6 +38,7 @@ module DryTwitter
         csrf_token:   Rack::Csrf.token(request.env),
         csrf_metatag: Rack::Csrf.metatag(request.env),
         csrf_tag:     Rack::Csrf.tag(request.env),
+        session:      session
       }
     end
 
