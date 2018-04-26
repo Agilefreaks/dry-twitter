@@ -11,7 +11,7 @@ module DryTwitter
       end
 
       def call(input)
-        result = SCHEMA.call(input) unless input.dig(:session, "user_id").nil?
+        result = SCHEMA.call(input) unless input[:session][:user_id].nil?
 
         if result.nil?
           Failure('Forbidden for users that are not logged')

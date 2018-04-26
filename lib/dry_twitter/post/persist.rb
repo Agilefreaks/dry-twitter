@@ -11,7 +11,7 @@ module DryTwitter
 
       def call(input)
         result = Try() {
-          posts.create(message: input["message"], user_id: input[:session]["user_id"])
+          posts.create(message: input["message"], user_id: input[:session][:user_id])
         }
 
         if result.value?

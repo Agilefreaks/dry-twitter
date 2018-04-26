@@ -14,7 +14,7 @@ RSpec.describe DryTwitter::Post::Validate do
   end
 
   it 'will fail with message not filled' do
-    result = subject.({ 'message' => '', :session => { "user_id" => 22 } })
+    result = subject.({ 'message' => '', :session => { :user_id => 22 } })
 
     expect(result.value[:message]).to be_truthy
     expect(result.value[:message].size).to eq(2)
@@ -23,7 +23,7 @@ RSpec.describe DryTwitter::Post::Validate do
   end
 
   it 'will fail with message length of 200' do
-    result = subject.({ 'message' => 's' * 200, :session => { "user_id" => 22 } })
+    result = subject.({ 'message' => 's' * 200, :session => { :user_id => 22 } })
 
     expect(result.value[:message]).to be_truthy
     expect(result.value[:message].size).to eq(1)
@@ -31,7 +31,7 @@ RSpec.describe DryTwitter::Post::Validate do
   end
 
   it 'will not fail with message filled correctly' do
-    result = subject.({ 'message' => 'some message', :session => { "user_id" => 22 } })
+    result = subject.({ 'message' => 'some message', :session => { :user_id => 22 } })
 
     expect(result.value[:message]).to be_falsey
   end

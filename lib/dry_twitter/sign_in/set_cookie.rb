@@ -6,9 +6,13 @@ module DryTwitter
       include Dry::Transaction::Operation
 
       def call(input)
+        user = input["user"]
+        user_name = user["user_name"]
+        user_id = user["user_id"]
+
         session = input[:session]
-        user_name = input["user"]["user_name"]
         session[:user_name] = user_name
+        session[:user_id] = user_id
 
         Success(input)
       end

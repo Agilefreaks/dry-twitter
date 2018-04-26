@@ -6,9 +6,8 @@ class DryTwitter::Web
 
     r.post do
       r.resolve "sign_in.sign_in" do |sign_in|
-        params_and_env = r.params.merge({})
-        params_and_env[:session] = session
-        sign_in.call(params_and_env) do |m|
+        r.params[:session] = session
+        sign_in.call(r.params) do |m|
           m.success do
             r.redirect "/"
           end
