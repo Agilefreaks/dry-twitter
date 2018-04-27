@@ -1,20 +1,24 @@
 class DryTwitter::Web
-  route "register" do |r|
+  route "post" do |r|
     r.get do
-      r.view "register"
+      unless session[:user_name].nil?
+        r.view "post"
+      else
+        r.redirect "sign_in"
+      end
     end
 
     r.post do
-      r.resolve "registration.register" do |registration|
+      r.resolve "post.post" do |post|
         r.params[:session] = session
-        registration.call(r.params) do |m|
+        post.call(r.params) do |m|
           m.success do
             r.redirect "/"
           end
 
           m.failure do |errors|
             r.params[:errors] = errors
-            r.view "register", input: r.params
+            r.view "post", input: r.params
           end
         end
       end
