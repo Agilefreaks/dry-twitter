@@ -13,7 +13,7 @@ class DryTwitter::Web
         r.params[:session] = session
         post.call(r.params) do |m|
           m.success do
-            r.redirect "/"
+            r.redirect "/dashboard"
           end
 
           m.failure do |errors|
