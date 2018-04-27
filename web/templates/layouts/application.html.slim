@@ -9,12 +9,16 @@ html
       a.navbar-brand href="/#" Dry Twitter
 
       ul.navbar-nav.mr-auto
-        li.nav-item
+        li class=sign_in_class
           a.nav-link href="/register" Register
-        li.nav-item
+        li class=sign_in_class
           a.nav-link href="/sign_in" Sign in
         li.nav-item
           a.nav-link href="/about" About
+
+      ul.navbar-nav.ml-md-auto
+        li class=sign_out_class
+          a.nav-link Sign out
 
     == yield
 

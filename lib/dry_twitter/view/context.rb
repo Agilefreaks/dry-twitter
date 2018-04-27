@@ -35,6 +35,14 @@ module DryTwitter
         self[:session][:user_name]
       end
 
+      def sign_in_class
+        "nav-item #{'collapse' if user_name}"
+      end
+
+      def sign_out_class
+        "nav-item #{'collapse' if user_name.nil?}"
+      end
+
       private
 
       def [](name)
