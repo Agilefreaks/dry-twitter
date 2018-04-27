@@ -6,6 +6,7 @@ class DryTwitter::Web
 
     r.post do
       r.resolve "registration.register" do |registration|
+        r.params[:session] = session
         registration.call(r.params) do |m|
           m.success do
             r.redirect "/"

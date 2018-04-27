@@ -13,9 +13,12 @@ module DryTwitter
 
       def call(input)
         result = Try() {
+          user = input["user"]
           salt = SecureRandom.base64(16)
-          hash = Armor.digest(input["user"]["password"], salt)
-          users.create(user_name: input["user"]["user_name"], password: hash, salt: salt)
+          hash = Armor.digest(user["password"], salt)
+          user_data = users.create(user_name: user["user_name"], password: hash, salt: salt)
+
+          user["user_id"] = user_data["id"]
         }
 
         if result.value?

@@ -8,11 +8,12 @@ RSpec.describe DryTwitter::Registration::Persist do
 
   it 'will succeed' do
     users = double()
-    allow(users).to receive(:create)
+    allow(users).to receive(:create).and_return({"id" => 33})
 
     result = subject.({'user' => {'user_name' => 'test_user', 'password' => 'test_password'}}, users)
 
     expect(result.success?).to be true
+    expect(result.value["user"]["user_id"]).to be 33
   end
 
   it 'will fail' do
