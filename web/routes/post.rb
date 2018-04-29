@@ -1,12 +1,16 @@
 class DryTwitter::Web
-  route "register" do |r|
+  route "post" do |r|
     r.get do
-      r.view "register"
+      unless session[:user_name].nil?
+        r.view "post"
+      else
+        r.redirect "sign_in"
+      end
     end
 
     r.post do
-      r.resolve "registration.register" do |registration|
-        registration.call(r.params) do |m|
+      r.resolve "post.post" do |post|
+        post.call(r.params) do |m|
           m.success do
             r.redirect "/"
           end
@@ -14,7 +18,7 @@ class DryTwitter::Web
           m.failure do |errors|
             params_and_errors = r.params.merge({})
             params_and_errors[:errors] = errors
-            r.view "register", input: params_and_errors
+            r.view "post", input: params_and_errors
           end
         end
       end
