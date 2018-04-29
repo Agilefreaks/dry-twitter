@@ -1,1 +1,12 @@
-h2.text-center Dry Twitter Dashboard
+div.text-center
+  h2 Dry Twitter
+
+  - if user_name.nil?
+    h4 Join Dry Twitter today
+    div
+      a href="/register" Register
+    div
+      a href="/sign_in" Sign in
+
+  - else
+    h4 Welcome #{user_name}
