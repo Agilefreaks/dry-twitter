@@ -1,21 +1,17 @@
 require "dry/transaction/operation"
 require 'dry_twitter/import'
 require 'dry-monads'
-require 'armor'
-require 'securerandom'
 
 module DryTwitter
-  module Registration
+  module Post
     class Persist
       include Dry::Transaction::Operation
-      include DryTwitter::Import["repositories.users"]
+      include DryTwitter::Import["repositories.posts"]
       include Dry::Monads::Try::Mixin
 
       def call(input)
         result = Try() {
-          salt = SecureRandom.base64(16)
-          hash = Armor.digest(input["user"]["password"], salt)
-          users.create(user_name: input["user"]["user_name"], password: hash, salt: salt)
+          posts.create(message: input["message"], user_id: input[:session][:user_id])
         }
 
         if result.value?

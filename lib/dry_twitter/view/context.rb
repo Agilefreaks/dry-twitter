@@ -31,6 +31,10 @@ module DryTwitter
         self.class.new(attrs.merge(new_attrs))
       end
 
+      def user_name
+        self[:session][:user_name]
+      end
+
       private
 
       def [](name)
