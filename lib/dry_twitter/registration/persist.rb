@@ -25,11 +25,11 @@ module DryTwitter
             created_user_id
           end
 
-          user["user_id"] = user_id
+          {user_id: user_id, user_name: user["user_name"], session: input[:session]}
         }
 
         if result.value?
-          Success(input)
+          Success(result.value)
         else
           Failure(error_messages: [result.exception.message])
         end

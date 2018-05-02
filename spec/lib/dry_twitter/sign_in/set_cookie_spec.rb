@@ -7,8 +7,9 @@ RSpec.describe DryTwitter::SignIn::SetCookie do
   }
 
   it 'set cookie' do
-    result = subject.({:session => {}, 'user' => {'user_name' => 'un'}})
+    result = subject.({:session => {}, user_id: 33, :user_name => 'un'})
 
+    expect(result.value[:session][:user_id]).to be(33)
     expect(result.value[:session][:user_name]).to eq('un')
   end
 end

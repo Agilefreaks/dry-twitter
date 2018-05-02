@@ -21,11 +21,11 @@ module DryTwitter
           password_matches = (hash == user_data["password"])
           raise 'There is no user with the provided credentials' if !password_matches
 
-          user["user_id"] = user_data["id"]
+          {user_id: user_data["id"], user_name: user["user_name"], session: input[:session]}
         }
 
         if result.value?
-          Success(input)
+          Success(result.value)
         else
           Failure(result.exception.message)
         end
