@@ -1,0 +1,3 @@
+en:
+  errors:
+    session_user_id?: "Forbidden for users that are not logged"

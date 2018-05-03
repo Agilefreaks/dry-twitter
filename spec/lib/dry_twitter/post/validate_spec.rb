@@ -10,7 +10,7 @@ RSpec.describe DryTwitter::Post::Validate do
     result = subject.({ 'message' => '', :session => {}})
 
     expect(result.failure?).to be true
-    expect(result.value).to eq('Forbidden for users that are not logged')
+    expect(result.value[:session]).to include('Forbidden for users that are not logged')
   end
 
   it 'will fail with message not filled' do
