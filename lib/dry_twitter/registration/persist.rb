@@ -14,18 +14,14 @@ module DryTwitter
 
       def call(input)
         result = Try() {
-          user = input["user"]
-          salt = SecureRandom.base64(16)
-          hash = Armor.digest(user["password"], salt)
-
           user_id = users.transaction do |_|
-            user_data = users.create(user_name: user["user_name"], password: hash, salt: salt)
+            user_data = users.create(user_name: input[:user_name], password: input[:hash], salt: input[:salt])
             created_user_id = user_data["id"]
             followed_users.create(user_id: created_user_id, followed_user_id: created_user_id)
             created_user_id
           end
 
-          {user_id: user_id, user_name: user["user_name"], session: input[:session]}
+          {user_id: user_id, user_name: input[:user_name], session: input[:session]}
         }
 
         if result.value?
