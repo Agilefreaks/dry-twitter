@@ -6,22 +6,25 @@ form.text-center action="/register" method="post"
     label.sr-only for="user_name" User name
     input type="text" id="user_name" name="user[user_name]" value="#{(user || {}).fetch('user_name', '')}" placeholder="User name"
     ul
-      - (errors || {}).fetch(:user_name, []).each do |error|
-        p = error
+    - (errors || {}).fetch(:user_name, []).each do |error|
+      p = error
 
   div
     label.sr-only for="password" Password
     input type="password" id="password" name="user[password]" placeholder="Password"
     ul
-      - (errors || {}).fetch(:password, []).each do |error|
-        p = error
+    - (errors || {}).fetch(:password, []).each do |error|
+      p = error
 
   div
     label.sr-only for="password" Confirm password
     input type="password" id="confirm_password" name="user[confirm_password]" placeholder="Confirm password"
     ul
-      - (errors || {}).fetch(:confirm_password, []).each do |error|
-        p = error
+    - (errors || {}).fetch(:confirm_password, []).each do |error|
+      p = error
 
   div
     button.btn.btn-primary type="submit" Create user
+    ul
+    - (errors || {}).fetch(:error_messages, []).each do |error|
+      p = error
