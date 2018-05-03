@@ -1,13 +1,24 @@
 require "dry/transaction/operation"
 require 'dry-validation'
+require 'dry_twitter/import'
 
 module DryTwitter
   module Registration
     class Validate
       include Dry::Transaction::Operation
+      include DryTwitter::Import["repositories.users"]
 
       SCHEMA = Dry::Validation.Form do
-        required(:user_name).filled(:str?, min_size?: 3)
+        configure do
+          option :users_repo
+
+          def unique_user_name?(value)
+            user_data = users_repo.by_user_name(value)
+            user_data.nil?
+          end
+        end
+
+        required(:user_name).filled(:str?, :unique_user_name?, min_size?: 3)
         required(:password).filled(:str?, min_size?: 8)
         required(:confirm_password).filled(:str?, min_size?: 8)
 
@@ -17,7 +28,7 @@ module DryTwitter
       end
 
       def call(input)
-        result = SCHEMA.call(input["user"])
+        result = SCHEMA.with(users_repo: users).call(input["user"])
 
         if result.success?
           Success(input)
