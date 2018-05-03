@@ -6,7 +6,6 @@ module DryTwitter
       include Dry::Transaction(container: DryTwitter::Container)
 
       step :validate, with: "registration.validate"
-      step :user_name_check, with: "registration.user_name_check"
       step :hash_password, with: "registration.hash_password"
       step :persist, with: "registration.persist"
       step :set_cookie, with: "sign_in.set_cookie"
