@@ -9,8 +9,8 @@ module DryTwitter
 
       def locals(options = {})
         super.merge(
-            users: options.dig(:users),
-            errors: options.dig(:errors)
+          users: options.dig(:users),
+          errors: options.dig(:errors)
         )
       end
     end

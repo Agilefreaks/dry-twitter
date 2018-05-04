@@ -10,7 +10,7 @@ div
     a href="/post" Post new message
 
   div.mt-3
-  - posts.each do |post|
+  - (posts || {}).each do |post|
     div.card.bg-light.ml-5.mr-5.mt-3
       div.ml-3.mt-1.mb-1
         span @#{post.user_id}

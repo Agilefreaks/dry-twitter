@@ -2,11 +2,14 @@ div.text-center
   h4 Follow users
 
   div.mt-5
-  - users.each do |user|
+  - (users || {}).each do |user|
     div.ml-5.mr-5.mt-3
       div.ml-3.mt-1.mb-1
-        span.mr-3 #{user.id}
-        button.ml-3.btn.btn-secondary.btn-sm Follow / Unfollow
+        form.text-center action="/users" method="post"
+          == csrf_tag
+          span.mr-3 #{user.id}
+          input.collapse type="text" id="user_id" name="user_id" value="#{user.id}"
+          button.ml-3.btn.btn-secondary.btn-sm type="submit" Follow / Unfollow
 
   ul
   - (errors || {}).fetch(:error_messages, []).each do |error|
