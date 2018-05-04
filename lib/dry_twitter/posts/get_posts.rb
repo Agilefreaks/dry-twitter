@@ -6,12 +6,12 @@ module DryTwitter
   module Posts
     class GetPosts
       include Dry::Transaction::Operation
-      include DryTwitter::Import["repositories.posts"]
+      include DryTwitter::Import["repositories.followed_users"]
       include Dry::Monads::Try::Mixin
 
-      def call(input)
+      def call(user_id)
         result = Try() {
-          posts.feed(input)
+          followed_users.feed(user_id)
         }
 
         if result.value?
