@@ -9,6 +9,10 @@ module DryTwitter
       def by_user_name(user_name)
         users.where(user_name: user_name).one
       end
+
+      def listing(user_id)
+        users.where {id.not(user_id)}.to_a
+      end
     end
   end
 end
