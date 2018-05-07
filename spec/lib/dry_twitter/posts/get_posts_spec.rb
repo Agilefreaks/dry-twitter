@@ -17,7 +17,7 @@ RSpec.describe DryTwitter::Posts::GetPosts do
 
   it 'will fail' do
     followed_users = double
-    allow(followed_users).to receive(:feed).and_raise('DB error')
+    allow(followed_users).to receive(:feed).and_raise(ROM::SQL::Error.new(StandardError.new('DB error')))
 
     result = subject.(33, followed_users)
 

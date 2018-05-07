@@ -1,4 +1,5 @@
 require 'dry-validation'
+require 'dry_twitter/operation'
 
 module DryTwitter
   module Post

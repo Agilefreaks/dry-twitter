@@ -17,7 +17,7 @@ RSpec.describe DryTwitter::Users::GetUsers do
 
   it 'will fail' do
     users = double
-    allow(users).to receive(:listing).and_raise('DB error')
+    allow(users).to receive(:listing).and_raise(ROM::SQL::Error.new(StandardError.new('DB error')))
 
     result = subject.(33, users)
 

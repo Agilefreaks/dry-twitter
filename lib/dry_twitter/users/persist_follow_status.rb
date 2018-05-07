@@ -1,5 +1,7 @@
 require 'dry_twitter/import'
 require 'dry-monads'
+require 'dry_twitter/operation'
+require 'rom/sql/error'
 
 module DryTwitter
   module Users
@@ -8,7 +10,7 @@ module DryTwitter
       include Dry::Monads::Try::Mixin
 
       def call(input)
-        result = Try() {
+        result = Try(ROM::SQL::Error) {
           user_id = input[:user_id]
           followed_user_id = input[:followed_user_id]
           followed_user = followed_users.followed_user(user_id, followed_user_id)

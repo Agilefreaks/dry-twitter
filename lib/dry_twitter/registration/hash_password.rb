@@ -1,6 +1,7 @@
 require 'dry-monads'
 require 'armor'
 require 'securerandom'
+require 'dry_twitter/operation'
 
 module DryTwitter
   module Registration

@@ -2,6 +2,8 @@ require 'dry_twitter/import'
 require 'dry-monads'
 require 'armor'
 require 'securerandom'
+require 'dry_twitter/operation'
+require 'rom/sql/error'
 
 module DryTwitter
   module Registration
@@ -11,7 +13,7 @@ module DryTwitter
       include Dry::Monads::Try::Mixin
 
       def call(input)
-        result = Try() {
+        result = Try(ROM::SQL::Error) {
           user_id = users.transaction do |_|
             user_data = users.create(user_name: input[:user_name], password: input[:hash], salt: input[:salt])
             created_user_id = user_data["id"]

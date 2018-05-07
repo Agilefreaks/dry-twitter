@@ -1,5 +1,6 @@
 require 'dry-validation'
 require 'dry_twitter/import'
+require 'dry_twitter/operation'
 
 module DryTwitter
   module Registration

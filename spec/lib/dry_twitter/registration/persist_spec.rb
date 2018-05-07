@@ -22,7 +22,7 @@ RSpec.describe DryTwitter::Registration::Persist do
 
   it 'will fail' do
     users = double()
-    allow(users).to receive(:transaction).and_raise('DB error')
+    allow(users).to receive(:transaction).and_raise(ROM::SQL::Error.new(StandardError.new('DB error')))
     allow(users).to receive(:create)
 
     followed_users = double()

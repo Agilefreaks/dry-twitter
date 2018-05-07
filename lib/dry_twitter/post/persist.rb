@@ -1,6 +1,7 @@
 require 'dry_twitter/import'
 require 'dry_twitter/operation'
 require 'dry-monads'
+require 'rom/sql/error'
 
 module DryTwitter
   module Post
@@ -9,7 +10,7 @@ module DryTwitter
       include Dry::Monads::Try::Mixin
 
       def call(input)
-        result = Try() {
+        result = Try(ROM::SQL::Error) {
           posts.create(message: input["message"], user_id: input[:session][:user_id])
         }
 

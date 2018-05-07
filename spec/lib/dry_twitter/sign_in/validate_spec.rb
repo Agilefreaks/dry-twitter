@@ -22,7 +22,7 @@ RSpec.describe DryTwitter::SignIn::Validate do
 
   it 'will fail' do
     users = double()
-    allow(users).to receive(:by_user_name).and_raise("DB error")
+    allow(users).to receive(:by_user_name).and_raise(ROM::SQL::Error.new(StandardError.new('DB error')))
 
     result = subject.({'user' => {'user_name' => 'fail_user', 'password' => 'test_password'}}, users)
 

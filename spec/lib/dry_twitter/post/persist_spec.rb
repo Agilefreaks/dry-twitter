@@ -17,7 +17,7 @@ RSpec.describe DryTwitter::Post::Persist do
 
   it 'will fail' do
     posts = double()
-    allow(posts).to receive(:create).and_raise('DB error')
+    allow(posts).to receive(:create).and_raise(ROM::SQL::Error.new(StandardError.new('DB error')))
 
     result = subject.({'message' => 'some message', :session => {"user_id" => 22}}, posts)
 

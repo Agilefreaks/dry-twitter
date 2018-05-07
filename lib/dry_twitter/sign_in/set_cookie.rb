@@ -1,3 +1,5 @@
+require 'dry_twitter/operation'
+
 module DryTwitter
   module SignIn
     class SetCookie < Operation
