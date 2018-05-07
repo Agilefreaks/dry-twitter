@@ -1,5 +1,6 @@
 require "dry/web/roda/application"
 require_relative "container"
+require "roda_plugins"
 
 module DryTwitter
   class Web < Dry::Web::Roda::Application
@@ -17,6 +18,7 @@ module DryTwitter
     plugin :error_handler
     plugin :flash
     plugin :multi_route
+    plugin :auth
 
     route do |r|
       r.multi_route

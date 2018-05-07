@@ -1,6 +1,6 @@
 class DryTwitter::Web
   route "users" do |r|
-    unless session[:user_name].nil?
+    r.authorize do
       r.get do
         r.resolve "users.users" do |users|
           users.call(session[:user_id]) do |m|
@@ -28,8 +28,6 @@ class DryTwitter::Web
           end
         end
       end
-    else
-      r.redirect "sign_in"
     end
   end
 end
