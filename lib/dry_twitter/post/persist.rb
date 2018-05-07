@@ -1,11 +1,10 @@
-require "dry/transaction/operation"
 require 'dry_twitter/import'
+require 'dry_twitter/operation'
 require 'dry-monads'
 
 module DryTwitter
   module Post
-    class Persist
-      include Dry::Transaction::Operation
+    class Persist < Operation
       include DryTwitter::Import["repositories.posts"]
       include Dry::Monads::Try::Mixin
 

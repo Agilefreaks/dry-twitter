@@ -1,13 +1,10 @@
-require "dry/transaction/operation"
 require 'dry-monads'
 require 'armor'
 require 'securerandom'
 
 module DryTwitter
   module Registration
-    class HashPassword
-      include Dry::Transaction::Operation
-
+    class HashPassword < Operation
       def call(input)
         user = input["user"]
         salt = SecureRandom.base64(16)

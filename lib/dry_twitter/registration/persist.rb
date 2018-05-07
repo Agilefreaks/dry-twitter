@@ -1,4 +1,3 @@
-require "dry/transaction/operation"
 require 'dry_twitter/import'
 require 'dry-monads'
 require 'armor'
@@ -6,8 +5,7 @@ require 'securerandom'
 
 module DryTwitter
   module Registration
-    class Persist
-      include Dry::Transaction::Operation
+    class Persist < Operation
       include DryTwitter::Import["repositories.users"]
       include DryTwitter::Import["repositories.followed_users"]
       include Dry::Monads::Try::Mixin

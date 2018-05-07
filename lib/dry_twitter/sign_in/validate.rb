@@ -1,4 +1,3 @@
-require "dry/transaction/operation"
 require "dry_twitter/import"
 require 'dry-monads'
 require 'armor'
@@ -6,8 +5,7 @@ require 'securerandom'
 
 module DryTwitter
   module SignIn
-    class Validate
-      include Dry::Transaction::Operation
+    class Validate < Operation
       include DryTwitter::Import["repositories.users"]
       include Dry::Monads::Try::Mixin
 

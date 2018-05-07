@@ -1,11 +1,9 @@
-require 'dry/transaction/operation'
 require 'dry_twitter/import'
 require 'dry-monads'
 
 module DryTwitter
   module Users
-    class PersistFollowStatus
-      include Dry::Transaction::Operation
+    class PersistFollowStatus < Operation
       include DryTwitter::Import["repositories.followed_users"]
       include Dry::Monads::Try::Mixin
 

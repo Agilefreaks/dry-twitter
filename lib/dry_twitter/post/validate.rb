@@ -1,11 +1,8 @@
-require "dry/transaction/operation"
 require 'dry-validation'
 
 module DryTwitter
   module Post
-    class Validate
-      include Dry::Transaction::Operation
-
+    class Validate < Operation
       SCHEMA = Dry::Validation.Form do
         configure do
           config.messages_file = Container.root.join("en.yml")

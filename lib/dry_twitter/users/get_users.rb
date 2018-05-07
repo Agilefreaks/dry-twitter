@@ -1,11 +1,9 @@
-require 'dry/transaction/operation'
 require 'dry_twitter/import'
 require 'dry-monads'
 
 module DryTwitter
   module Users
-    class GetUsers
-      include Dry::Transaction::Operation
+    class GetUsers < Operation
       include DryTwitter::Import["repositories.users"]
       include Dry::Monads::Try::Mixin
 

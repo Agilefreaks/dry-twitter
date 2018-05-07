@@ -79,7 +79,6 @@ RSpec.describe DryTwitter::Registration::Validate do
 
     result = subject.({'user' => {'user_name' => 'existing_user', 'password' => 'test_password'}}, users)
 
-    p result
     expect(result.failure?).to be true
     expect(result.value[:user_name]).to include('there is already a user with the provided user name')
   end

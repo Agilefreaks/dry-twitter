@@ -1,11 +1,9 @@
-require "dry/transaction/operation"
 require 'dry-validation'
 require 'dry_twitter/import'
 
 module DryTwitter
   module Registration
-    class Validate
-      include Dry::Transaction::Operation
+    class Validate < Operation
       include DryTwitter::Import["repositories.users"]
 
       SCHEMA = Dry::Validation.Form do
