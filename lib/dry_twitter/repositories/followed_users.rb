@@ -13,6 +13,10 @@ module DryTwitter
       def followed_user(user_id, followed_user_id)
         followed_users.where(user_id: user_id, followed_user_id: followed_user_id).one
       end
+
+      def get_followed_users(id)
+        followed_users.where {user_id.in(id) & followed_user_id.not(id)}.to_a
+      end
     end
   end
 end
