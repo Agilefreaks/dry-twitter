@@ -10,14 +10,13 @@ div
     a href="/post" Post new message
 
   div.mt-3
-  - (users || {}).each do |user|
-    - (user.followed_user.posts || {}).each do |post|
-      div.card.bg-light.ml-5.mr-5.mt-3
-        div.ml-3.mt-1.mb-1
-          span @#{user.followed_user.user_name}
-          span.ml-5 = post.created_at.strftime("%m/%d/%Y")
-        div.ml-3.mt-1.mb-1
-          = post.message
+  - (posts || {}).each do |post|
+    div.card.bg-light.ml-5.mr-5.mt-3
+      div.ml-3.mt-1.mb-1
+        span @#{post[:user_name]}
+        span.ml-5 = post[:created_at].strftime("%m/%d/%Y")
+      div.ml-3.mt-1.mb-1
+        = post[:message]
 
   ul
   - (errors || {}).fetch(:error_messages, []).each do |error|

@@ -11,7 +11,17 @@ module DryTwitter
 
       def call(user_id)
         result = Try(ROM::SQL::Error) {
-          followed_users.feed(user_id)
+          result = []
+          followed_users.feed(user_id).map do |user|
+            result << user.followed_user.posts.map do |post|
+              {
+                  user_name: user.followed_user['user_name'],
+                  created_at: post['created_at'],
+                  message: post['message']
+              }
+            end
+          end
+          result.flatten!.sort! {|x, y| -(x[:created_at] <=> y[:created_at])}
         }
 
         if result.value?

@@ -4,7 +4,7 @@ class DryTwitter::Web
       r.resolve "posts.posts" do |posts|
         posts.call(session[:user_id]) do |m|
           m.success do |value|
-            r.view "dashboard", users: value
+            r.view "dashboard", posts: value
           end
 
           m.failure do |errors|
