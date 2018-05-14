@@ -2,14 +2,14 @@ require "dry_twitter/view/controller"
 
 module DryTwitter
   module Views
-    class Register < DryTwitter::View::Controller
+    class Post < DryTwitter::View::Controller
       configure do |config|
-        config.template = "register"
+        config.template = "post"
       end
 
       def locals(options = {})
         super.merge(
-          user: options.dig(:input, "user"),
+          message: options.dig(:input, "message"),
           errors: options.dig(:input, :errors)
         )
       end

@@ -1,0 +1,5 @@
+en:
+  errors:
+    session_user_id?: "Forbidden for users that are not logged"
+
+    unique_user_name?: "there is already a user with the provided user name"

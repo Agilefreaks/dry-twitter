@@ -1,0 +1,15 @@
+form.text-center action="/post" method="post"
+  == csrf_tag
+
+  div
+    textarea id="message" name="message" cols=100 rows=6 placeholder="Enter message"
+      | #{message}
+    ul
+    - (errors || {}).fetch(:message, []).each do |error|
+      p = error
+
+  div
+    button.btn.btn-primary.mt-3 type="submit" Post message
+    ul
+    - (errors || {}).fetch(:error_messages, []).each do |error|
+      p = error

@@ -1,5 +1,6 @@
 require "dry/web/roda/application"
 require_relative "container"
+require "roda_plugins"
 
 module DryTwitter
   class Web < Dry::Web::Roda::Application
@@ -17,6 +18,7 @@ module DryTwitter
     plugin :error_handler
     plugin :flash
     plugin :multi_route
+    plugin :auth
 
     route do |r|
       r.multi_route
@@ -38,6 +40,7 @@ module DryTwitter
         csrf_token:   Rack::Csrf.token(request.env),
         csrf_metatag: Rack::Csrf.metatag(request.env),
         csrf_tag:     Rack::Csrf.tag(request.env),
+        session:      session
       }
     end
 

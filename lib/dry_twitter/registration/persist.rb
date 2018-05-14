@@ -1,22 +1,34 @@
-require "dry/transaction/operation"
 require 'dry_twitter/import'
 require 'dry-monads'
 require 'armor'
 require 'securerandom'
+require 'dry_twitter/operation'
+require 'rom/sql/error'
 
 module DryTwitter
   module Registration
-    class Persist
-      include Dry::Transaction::Operation
+    class Persist < Operation
       include DryTwitter::Import["repositories.users"]
+      include DryTwitter::Import["repositories.followed_users"]
       include Dry::Monads::Try::Mixin
 
       def call(input)
-        Try() {
-          salt = SecureRandom.base64(16)
-          hash = Armor.digest(input["user"]["password"], salt)
-          users.create(user_name: input["user"]["user_name"], password: hash, salt: salt)
-        }.to_result
+        result = Try(ROM::SQL::Error) {
+          user_id = users.transaction do |_|
+            user_data = users.create(user_name: input[:user_name], password: input[:hash], salt: input[:salt])
+            created_user_id = user_data["id"]
+            followed_users.create(user_id: created_user_id, followed_user_id: created_user_id)
+            created_user_id
+          end
+
+          {user_id: user_id, user_name: input[:user_name], session: input[:session]}
+        }
+
+        if result.value?
+          Success(result.value)
+        else
+          Failure(error_messages: [result.exception.message])
+        end
       end
     end
   end
